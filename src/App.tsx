@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Grid, Typography, makeStyles, Paper } from "@material-ui/core";
+import { Grid, Typography, makeStyles, Paper, Box } from "@material-ui/core";
 import "./App.css";
 import { PlatformTable } from "./PlatformTable";
 import {
@@ -54,17 +54,24 @@ function App() {
               data={stewardshipTechnologyFees}
               header="Stewardship Technology"
             />
+            <Box m={3} />
+            <Typography variant="h6">
+              {`Total Stewardship Technology Fees: $${calcFee(
+                "stewardship",
+                stewardshipTechnologyFees,
+                state
+              )}`}
+            </Typography>
           </Grid>
           <Grid item xs={3} className={classes.tableContainer}>
             <PlatformTable data={myWellFees} header="My Well" />
+            <Box m={3} />
+            <Typography variant="h6">
+              {`Total My Well Fees: $${calcFee("mywell", myWellFees, state)}`}
+            </Typography>
           </Grid>
           <Grid item xs={5} className={classes.tableContainer}>
             <InputBox dispatch={dispatch} state={state} />
-          </Grid>
-        </Grid>
-        <Grid item container justify="center">
-          <Grid container item justify="center" alignContent="center">
-            <Typography variant="h1">Total Platform Fee: $99</Typography>
           </Grid>
         </Grid>
       </Grid>
@@ -81,6 +88,12 @@ const calcFee: (
     platform === "mywell"
       ? getMyWellMonthlyFee(state.noTransactionPerMonth)
       : getStewardshipTechonlogyMonthlyFee(state.noTransactionPerMonth);
+  const totalTransactionAmount =
+    state.noTransactionPerMonth * state.averageTransactionPerMonth;
+  const amountACH = totalTransactionAmount * state.percentACH;
+  const amountVisa = totalTransactionAmount * state.percentVisa;
+  const amountAMEX = totalTransactionAmount * state.percentAMEX;
+  return monthlyFee + amountACH + amountVisa + amountAMEX;
 };
 
 const useStyles = makeStyles((theme) => ({
