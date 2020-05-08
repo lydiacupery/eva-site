@@ -72,3 +72,30 @@ export const getMyWellMonthlyFee = (transactions: number) => {
     return 499;
   }
 };
+
+export const breezeFees: FeesForPlatform = {
+  ACH: {
+    transactionFee: 0.25,
+    rate: 0.01,
+  },
+  Visa: {
+    transactionFee: 0.3,
+    rate: 0.029,
+  },
+  Mastercard: {
+    transactionFee: 0.3,
+    rate: 0.029,
+  },
+  Discover: {
+    transactionFee: 0.35,
+    rate: 0.0,
+  },
+  AmericanExpress: {
+    transactionFee: 0.35,
+    rate: 0.0,
+  },
+};
+
+export const getBreezeMonthlyFee = (transactions: number) => {
+  return 20;
+};

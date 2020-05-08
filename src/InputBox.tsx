@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React from "react";
 import { TextField, Paper, Grid, Typography } from "@material-ui/core";
 import { Action, State } from "./reducer";
 
@@ -9,7 +9,7 @@ type Props = {
 export const InputBox: React.SFC<Props> = (props) => {
   const { dispatch, state } = props;
   return (
-    <Paper style={{ padding: "40px", width: "400px" }}>
+    <Paper style={{ padding: "40px", width: "200px" }}>
       <Grid container justify="center">
         <Typography variant="h6">Inputs</Typography>
       </Grid>

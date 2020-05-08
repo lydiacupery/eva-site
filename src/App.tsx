@@ -8,20 +8,22 @@ import {
   FeesForPlatform,
   getMyWellMonthlyFee,
   getStewardshipTechonlogyMonthlyFee,
+  getBreezeMonthlyFee,
 } from "./data";
 import { InputBox } from "./InputBox";
 import { reducer, State } from "./reducer";
+import numeral from "numeral";
 
 function App() {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, {
     noTransactionPerMonth: 100,
     averageTransactionPerMonth: 10,
-    percentACH: 0.1,
-    percentVisa: 0.1,
-    percentMastercard: 0.5,
-    percentDiscover: 0.2,
-    percentAMEX: 0.3,
+    percentACH: 0.7816,
+    percentVisa: 0.1149,
+    percentMastercard: 0.1034,
+    percentDiscover: 0.0,
+    percentAMEX: 0.0,
   });
   return (
     // <div className="App">
@@ -56,7 +58,7 @@ function App() {
             />
             <Box m={3} />
             <Typography variant="h6">
-              {`Total Stewardship Technology Fees: $${calcFee(
+              {`Total Stewardship Technology Fees: ${calcFee(
                 "stewardship",
                 stewardshipTechnologyFees,
                 state
@@ -67,10 +69,17 @@ function App() {
             <PlatformTable data={myWellFees} header="My Well" />
             <Box m={3} />
             <Typography variant="h6">
-              {`Total My Well Fees: $${calcFee("mywell", myWellFees, state)}`}
+              {`Total My Well Fees: ${calcFee("mywell", myWellFees, state)}`}
             </Typography>
           </Grid>
-          <Grid item xs={5} className={classes.tableContainer}>
+          <Grid item xs={3} className={classes.tableContainer}>
+            <PlatformTable data={myWellFees} header="Breeze" />
+            <Box m={3} />
+            <Typography variant="h6">
+              {`Total Breeze Fees: ${calcFee("breeze", myWellFees, state)}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={3} className={classes.tableContainer}>
             <InputBox dispatch={dispatch} state={state} />
           </Grid>
         </Grid>
@@ -80,20 +89,24 @@ function App() {
 }
 
 const calcFee: (
-  platform: "mywell" | "stewardship",
+  platform: "mywell" | "stewardship" | "breeze",
   fees: FeesForPlatform,
   state: State
-) => number = (platform, fees, state) => {
+) => string = (platform, fees, state) => {
   const monthlyFee =
     platform === "mywell"
       ? getMyWellMonthlyFee(state.noTransactionPerMonth)
+      : platform === "breeze"
+      ? getBreezeMonthlyFee(state.noTransactionPerMonth)
       : getStewardshipTechonlogyMonthlyFee(state.noTransactionPerMonth);
   const totalTransactionAmount =
     state.noTransactionPerMonth * state.averageTransactionPerMonth;
   const amountACH = totalTransactionAmount * state.percentACH;
   const amountVisa = totalTransactionAmount * state.percentVisa;
   const amountAMEX = totalTransactionAmount * state.percentAMEX;
-  return monthlyFee + amountACH + amountVisa + amountAMEX;
+  return numeral(monthlyFee + amountACH + amountVisa + amountAMEX).format(
+    "$0.00"
+  );
 };
 
 const useStyles = makeStyles((theme) => ({
