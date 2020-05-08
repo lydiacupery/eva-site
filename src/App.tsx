@@ -17,8 +17,8 @@ import numeral from "numeral";
 function App() {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, {
-    noTransactionPerMonth: 100,
-    averageTransactionPerMonth: 10,
+    noTransactionPerMonth: 87,
+    averageTransactionPerMonth: 225,
     percentACH: 0.7816,
     percentVisa: 0.1149,
     percentMastercard: 0.1034,
