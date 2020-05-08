@@ -74,7 +74,7 @@ function App() {
             </Typography>
           </Grid>
           <Grid item xs={3} className={classes.tableContainer}>
-            <PlatformTable data={myWellFees} header="Breeze" />
+            <PlatformTable data={breezeFees} header="Breeze" />
             <Box m={3} />
             <Typography variant="h6">
               {`Total Breeze Fees: ${calcFee("breeze", breezeFees, state)}`}
@@ -102,9 +102,17 @@ const calcFee: (
       : getStewardshipTechonlogyMonthlyFee(state.noTransactionPerMonth);
   const totalTransactionAmount =
     state.noTransactionPerMonth * state.averageTransactionPerMonth;
-  const amountACH = totalTransactionAmount * state.percentACH;
-  const amountVisa = totalTransactionAmount * state.percentVisa;
-  const amountMastercard = totalTransactionAmount * state.percentMastercard;
+  const amountACH =
+    totalTransactionAmount * state.percentACH * fees.ACH.rate +
+    state.noTransactionPerMonth * state.percentACH * fees.ACH.transactionFee;
+  const amountVisa =
+    totalTransactionAmount * state.percentACH * fees.Visa.rate +
+    state.noTransactionPerMonth * state.percentACH * fees.Visa.transactionFee;
+  const amountMastercard =
+    totalTransactionAmount * state.percentACH * fees.Mastercard.rate +
+    state.noTransactionPerMonth *
+      state.percentACH *
+      fees.Mastercard.transactionFee;
   return numeral(monthlyFee + amountACH + amountVisa + amountMastercard).format(
     "$0,0.00"
   );

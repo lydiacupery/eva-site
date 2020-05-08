@@ -88,11 +88,11 @@ export const breezeFees: FeesForPlatform = {
   },
   Discover: {
     transactionFee: 0.35,
-    rate: 0.0,
+    rate: 0.035,
   },
   AmericanExpress: {
     transactionFee: 0.35,
-    rate: 0.0,
+    rate: 0.035,
   },
 };
 
