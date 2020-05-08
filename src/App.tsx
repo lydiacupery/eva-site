@@ -115,10 +115,10 @@ const calcFee: (
     totalTransactionAmount * state.percentACH * fees.ACH.rate +
     state.noTransactionPerMonth * state.percentACH * fees.ACH.transactionFee;
   const amountVisa =
-    totalTransactionAmount * state.percentACH * fees.Visa.rate +
+    totalTransactionAmount * state.percentVisa * fees.Visa.rate +
     state.noTransactionPerMonth * state.percentACH * fees.Visa.transactionFee;
   const amountMastercard =
-    totalTransactionAmount * state.percentACH * fees.Mastercard.rate +
+    totalTransactionAmount * state.percentMastercard * fees.Mastercard.rate +
     state.noTransactionPerMonth *
       state.percentACH *
       fees.Mastercard.transactionFee;
