@@ -58,6 +58,8 @@ function App() {
               header="Stewardship Technology"
             />
             <Box m={3} />
+            <Typography>Has flat monthly fee of $20</Typography>
+            <Box m={3} />
             <Typography variant="h6">
               {`Total Stewardship Technology Fees: ${calcFee(
                 "stewardship",
@@ -69,12 +71,19 @@ function App() {
           <Grid item xs={3} className={classes.tableContainer}>
             <PlatformTable data={myWellFees} header="My Well" />
             <Box m={3} />
+            <Typography>
+              Has monthly fee of $
+              {getMyWellMonthlyFee(state.noTransactionPerMonth)}
+            </Typography>
+            <Box m={3} />
             <Typography variant="h6">
               {`Total My Well Fees: ${calcFee("mywell", myWellFees, state)}`}
             </Typography>
           </Grid>
           <Grid item xs={3} className={classes.tableContainer}>
             <PlatformTable data={breezeFees} header="Breeze" />
+            <Box m={3} />
+            <Typography>Has no monthly fee</Typography>
             <Box m={3} />
             <Typography variant="h6">
               {`Total Breeze Fees: ${calcFee("breeze", breezeFees, state)}`}

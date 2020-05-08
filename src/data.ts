@@ -97,5 +97,5 @@ export const breezeFees: FeesForPlatform = {
 };
 
 export const getBreezeMonthlyFee = (transactions: number) => {
-  return 20;
+  return 0;
 };
