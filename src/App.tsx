@@ -103,8 +103,8 @@ const calcFee: (
     state.noTransactionPerMonth * state.averageTransactionPerMonth;
   const amountACH = totalTransactionAmount * state.percentACH;
   const amountVisa = totalTransactionAmount * state.percentVisa;
-  const amountAMEX = totalTransactionAmount * state.percentAMEX;
-  return numeral(monthlyFee + amountACH + amountVisa + amountAMEX).format(
+  const amountMastercard = totalTransactionAmount * state.percentMastercard;
+  return numeral(monthlyFee + amountACH + amountVisa + amountMastercard).format(
     "$000,000.00"
   );
 };
