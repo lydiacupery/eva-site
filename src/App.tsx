@@ -20,9 +20,9 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     noTransactionPerMonth: 87,
     averageTransactionPerMonth: 225,
-    percentACH: 0.07816,
-    percentVisa: 0.01149,
-    percentMastercard: 0.01034,
+    percentACH: 0.7816,
+    percentVisa: 0.1149,
+    percentMastercard: 0.1034,
     percentDiscover: 0.0,
     percentAMEX: 0.0,
   });
