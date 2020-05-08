@@ -19,9 +19,9 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     noTransactionPerMonth: 87,
     averageTransactionPerMonth: 225,
-    percentACH: 0.7816,
-    percentVisa: 0.1149,
-    percentMastercard: 0.1034,
+    percentACH: 0.007816,
+    percentVisa: 0.001149,
+    percentMastercard: 0.001034,
     percentDiscover: 0.0,
     percentAMEX: 0.0,
   });
@@ -105,7 +105,7 @@ const calcFee: (
   const amountVisa = totalTransactionAmount * state.percentVisa;
   const amountAMEX = totalTransactionAmount * state.percentAMEX;
   return numeral(monthlyFee + amountACH + amountVisa + amountAMEX).format(
-    "$0.00"
+    "$000,000.00"
   );
 };
 
