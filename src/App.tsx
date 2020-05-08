@@ -9,6 +9,7 @@ import {
   getMyWellMonthlyFee,
   getStewardshipTechonlogyMonthlyFee,
   getBreezeMonthlyFee,
+  breezeFees,
 } from "./data";
 import { InputBox } from "./InputBox";
 import { reducer, State } from "./reducer";
@@ -76,7 +77,7 @@ function App() {
             <PlatformTable data={myWellFees} header="Breeze" />
             <Box m={3} />
             <Typography variant="h6">
-              {`Total Breeze Fees: ${calcFee("breeze", myWellFees, state)}`}
+              {`Total Breeze Fees: ${calcFee("breeze", breezeFees, state)}`}
             </Typography>
           </Grid>
           <Grid item xs={3} className={classes.tableContainer}>
